@@ -4,12 +4,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MessageCircle, Mail, MapPin, Clock } from 'lucide-react';
+import { MessageCircle, Mail, MapPin, Clock, Instagram } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    phone: '',
     message: ''
   });
 
@@ -21,26 +21,49 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    
+    try {
+      const response = await fetch('https://hook.us2.make.com/jal15g72m88xjlnqvmby9023n6pa632b', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          message: formData.message,
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (response.ok) {
+        // Show success message
+        alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+        // Reset form
+        setFormData({ name: '', phone: '', message: '' });
+      } else {
+        throw new Error('Error al enviar el mensaje');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
+    }
   };
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent('Hola! Me interesa crear una landing page para mi negocio. ¿Podrían darme más información?');
-    window.open(`https://wa.me/5215512345678?text=${message}`, '_blank');
+    window.open(`https://wa.me/527771101880?text=${message}`, '_blank');
   };
 
   return (
-    <section id="contacto" className="py-20 bg-gradient-contact text-white">
+    <section id="contacto" className="py-16 bg-gradient-to-b from-gray-900 to-black overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
               ¿Listo para lanzar tu proyecto?
             </h2>
             
@@ -50,18 +73,8 @@ const Contact = () => {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">WhatsApp</h3>
-                  <p className="text-white/80">+52 55 1234 5678</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Email</h3>
-                  <p className="text-white/80">hola@webster.mx</p>
+                  <h3 className="font-semibold text-white">WhatsApp</h3>
+                  <p className="text-white/80">+52 777 110 1880</p>
                 </div>
               </div>
 
@@ -70,8 +83,8 @@ const Contact = () => {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Ubicación</h3>
-                  <p className="text-white/80">Ciudad de México</p>
+                  <h3 className="font-semibold text-white">Ubicación</h3>
+                  <p className="text-white/80">México</p>
                 </div>
               </div>
 
@@ -80,21 +93,33 @@ const Contact = () => {
                   <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Horario</h3>
-                  <p className="text-white/80">Lun - Vie: 9:00 - 18:00</p>
+                  <h3 className="font-semibold text-white">Horario</h3>
+                  <p className="text-white/80">Todo el día, todos los días...😉</p>
                 </div>
               </div>
             </div>
 
-            <Button 
-              variant="whatsapp" 
-              size="xl"
-              onClick={handleWhatsApp}
-              className="w-full lg:w-auto gap-2"
-            >
-              <MessageCircle className="w-5 h-5" />
-              Habla con un asesor
-            </Button>
+            <div className="space-y-4">
+              <Button 
+                variant="whatsapp" 
+                size="xl"
+                onClick={handleWhatsApp}
+                className="w-full gap-2 text-lg py-6"
+              >
+                <MessageCircle className="w-6 h-6" />
+                Habla con un asesor
+              </Button>
+              
+              <a 
+                href="https://www.instagram.com/webster_landing?igsh=dXo2cDZ2Mm5lZWs1" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full px-6 py-3 text-lg font-medium text-white rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 transition-opacity gap-2"
+              >
+                <Instagram className="w-6 h-6" />
+                Síguenos en Instagram
+              </a>
+            </div>
           </div>
 
           {/* Contact Form */}
@@ -106,7 +131,7 @@ const Contact = () => {
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="name" className="text-white">Nombre</Label>
+                  <Label htmlFor="name" className="text-white font-medium">Nombre</Label>
                   <Input
                     id="name"
                     name="name"
@@ -120,21 +145,21 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-white">Email</Label>
+                  <Label htmlFor="phone" className="text-white font-medium">Número de teléfono</Label>
                   <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
                     onChange={handleInputChange}
                     className="bg-white/20 border-white/30 text-white placeholder:text-white/60"
-                    placeholder="tu@email.com"
+                    placeholder="+52 55 1234 5678"
                     required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="message" className="text-white">Mensaje</Label>
+                  <Label htmlFor="message" className="text-white font-medium">Mensaje</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -148,9 +173,9 @@ const Contact = () => {
 
                 <Button 
                   type="submit" 
-                  variant="hero" 
+                  variant="default" 
                   size="xl"
-                  className="w-full"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   Enviar mensaje
                 </Button>

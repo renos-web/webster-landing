@@ -1,63 +1,103 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Eye } from 'lucide-react';
-import heroImage from '@/assets/hero-illustration.png';
 
 const Hero = () => {
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if the device is mobile on mount and on resize
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  const togglePlayPause = () => {
+    const video = isMobile ? mobileVideoRef.current : videoRef.current;
+    if (video) {
+      if (video.paused) {
+        video.play().catch(error => console.error('Error playing video:', error));
+        setIsPlaying(true);
+      } else {
+        video.pause();
+        setIsPlaying(false);
+      }
     }
   };
 
-  return (
-    <section id="inicio" className="bg-gradient-hero py-20 lg:py-32 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Web pages & stuff
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
-              Landing pages profesionales para lanzar tu proyecto online rápido y sin complicaciones
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                variant="hero" 
-                size="xl"
-                onClick={() => scrollToSection('#contacto')}
-                className="shadow-glow"
-              >
-                Cotiza tu landing
-              </Button>
-              <Button 
-                variant="hero-outline" 
-                size="xl"
-                className="gap-2"
-              >
-                <Eye className="w-5 h-5" />
-                Ver portafolio
-              </Button>
-            </div>
-          </div>
+  // Handle video play state
+  const handlePlay = () => setIsPlaying(true);
+  const handlePause = () => setIsPlaying(false);
 
-          {/* Illustration */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <img
-                src={heroImage}
-                alt="Laptop with rocket illustration representing web development"
-                className="w-full max-w-lg h-auto drop-shadow-2xl"
-              />
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-webster-yellow rounded-full animate-pulse opacity-80"></div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-white/20 rounded-full animate-pulse"></div>
-            </div>
-          </div>
-        </div>
+  // Sync initial play state between videos when switching between mobile/desktop
+  useEffect(() => {
+    const video = isMobile ? mobileVideoRef.current : videoRef.current;
+    if (!video) return;
+    
+    if (isPlaying) {
+      video.play().catch(error => console.error('Auto-play failed:', error));
+    } else {
+      video.pause();
+    }
+  }, [isMobile, isPlaying]);
+
+  return (
+    <section className="relative h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 w-full h-full">
+        {/* Desktop Video */}
+        <video 
+          ref={videoRef}
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="hidden md:block absolute inset-0 w-full h-full object-cover"
+          onPlay={handlePlay}
+          onPause={handlePause}
+        >
+          <source src="/images/portada-estrella.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Mobile Video */}
+        <video 
+          ref={mobileVideoRef}
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="md:hidden absolute inset-0 w-full h-full object-cover"
+          onPlay={handlePlay}
+          onPause={handlePause}
+        >
+          <source src="/images/fondo-vertical.mp4" type="video/mp4" />
+        </video>
       </div>
+      
+      <Button 
+        onClick={togglePlayPause}
+        variant="ghost"
+        size="icon"
+        className="absolute bottom-6 right-6 bg-black/40 hover:bg-black/60 text-white rounded-full h-12 w-12 flex items-center justify-center backdrop-blur-sm border border-white/20 shadow-lg transition-all hover:scale-110 z-10"
+        aria-label={isPlaying ? 'Pausar video' : 'Reproducir video'}
+      >
+        {isPlaying ? (
+          <Pause className="h-6 w-6" />
+        ) : (
+          <Play className="h-6 w-6 ml-1" />
+        )}
+      </Button>
     </section>
   );
 };

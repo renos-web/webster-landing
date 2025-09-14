@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Rocket, Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navigation = [
     { name: 'Inicio', href: '#inicio' },
-    { name: 'Servicios', href: '#servicios' },
+    { name: 'Paquetes', href: '#servicios' },
     { name: 'Ventajas', href: '#ventajas' },
     { name: 'Testimonios', href: '#testimonios' },
     { name: 'Contacto', href: '#contacto' }
@@ -16,27 +17,46 @@ const Header = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 100; // Adjust this value based on your header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     setIsMenuOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
+
   return (
-    <header className="bg-white shadow-card sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-webster-blue">Webster</h1>
+    <header className={`fixed w-full top-4 z-50 px-4 ${scrolled ? 'py-2' : 'py-4'} transition-all duration-300`}>
+      <div className="max-w-7xl mx-auto">
+        <div className={`bg-black/80 backdrop-blur-md rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
+          {/* Logo - Hidden on mobile */}
+          <div className="hidden md:block flex-shrink-0">
+            <h1 className="text-xl font-bold text-white">Webster</h1>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-1 mx-auto">
             {navigation.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-webster-text hover:text-webster-blue transition-colors font-medium"
+                className="text-white/90 hover:text-white px-4 py-2 text-sm font-medium transition-colors rounded-full hover:bg-white/10"
               >
                 {item.name}
               </button>
@@ -44,52 +64,49 @@ const Header = () => {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden md:flex">
+          <div className="hidden md:flex flex-shrink-0">
             <Button 
-              variant="cta" 
-              size="lg"
               onClick={() => scrollToSection('#contacto')}
-              className="gap-2"
+              className="gap-2 bg-[#0053e3] hover:bg-[#0047c0] text-white font-medium rounded-full px-6 py-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#0053e3]/30 hover:scale-105"
             >
               <Rocket className="w-4 h-4" />
-              Solicita tu Landing
+              Cotizar
             </Button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-white hover:bg-white/10 rounded-full"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+          <div className="md:hidden mt-3 bg-black/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-xl">
+            <div className="px-4 py-3 space-y-1">
               {navigation.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-webster-text hover:text-webster-blue hover:bg-accent rounded-md transition-colors"
+                  className="block w-full text-left px-4 py-3 text-white/90 hover:bg-white/10 rounded-lg transition-colors"
                 >
                   {item.name}
                 </button>
               ))}
-              <div className="pt-4">
+              <div className="pt-2 pb-3 px-1">
                 <Button 
-                  variant="cta" 
-                  size="lg"
                   onClick={() => scrollToSection('#contacto')}
-                  className="w-full gap-2"
+                  className="w-full gap-2 bg-[#0053e3] hover:bg-[#0047c0] text-white font-medium rounded-full py-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#0053e3]/30"
                 >
                   <Rocket className="w-4 h-4" />
-                  Solicita tu Landing
+                  Cotizar
                 </Button>
               </div>
             </div>

@@ -10,6 +10,10 @@ export default {
 	],
 	prefix: "",
 	theme: {
+		fontFamily: {
+      sans: ['var(--font-sans)', 'sans-serif'],
+      montserrat: ['Montserrat', 'sans-serif'],
+    },
 		container: {
 			center: true,
 			padding: '2rem',
@@ -19,6 +23,7 @@ export default {
 		},
 		extend: {
 			colors: {
+				'webster-blue': '#0057db',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

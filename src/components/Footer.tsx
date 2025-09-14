@@ -11,36 +11,33 @@ const Footer = () => {
 
   const navigation = [
     { name: 'Inicio', href: '#inicio' },
-    { name: 'Servicios', href: '#servicios' },
+    { name: 'Paquetes', href: '#servicios' },
+    { name: 'Ventajas', href: '#ventajas' },
+    { name: 'Testimonios', href: '#testimonios' },
     { name: 'Contacto', href: '#contacto' }
   ];
 
   const socialLinks = [
-    { name: 'Instagram', icon: Instagram, href: '#' },
-    { name: 'Facebook', icon: Facebook, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' }
+    { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/webster_landing?igsh=dXo2cDZ2Mm5lZWs1' },
+    { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/share/1HQLKM7H6N/?mibextid=wwXIfr' }
   ];
 
   return (
-    <footer className="bg-webster-blue-dark text-white">
+    <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">Webster</h3>
             <p className="text-white/80 mb-6 leading-relaxed">
-              Agencia digital especializada en landing pages para emprendedores y pequeños negocios en México. 
-              Tu presencia online en días, no semanas.
+              Desarrolladores web especializados en landing pages para emprendedores y pequeños negocios. 
+              Presencia online a tu medida en días, no semanas. 🚀
             </p>
             
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 <MessageCircle className="w-5 h-5" />
-                <span>+52 55 1234 5678</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5" />
-                <span>hola@webster.mx</span>
+                <span>+52 777 110 1880</span>
               </div>
             </div>
           </div>
@@ -59,11 +56,6 @@ const Footer = () => {
                   </button>
                 </li>
               ))}
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Portafolio
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -71,8 +63,8 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Horarios</h4>
             <p className="text-white/80 mb-6">
-              Lunes a Viernes<br />
-              9:00 AM - 6:00 PM
+              ¡De verdad!<br />
+              ¡Todo el día, todos los días!
             </p>
             
             <h4 className="text-lg font-semibold mb-4">Síguenos</h4>
