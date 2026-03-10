@@ -28,10 +28,9 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Webster</h3>
-            <p className="text-white/80 mb-6 leading-relaxed">
-              Desarrolladores web especializados en landing pages para emprendedores y pequeños negocios. 
-              Presencia online a tu medida en días, no semanas. 🚀
+            <h3 className="text-xl md:text-2xl font-bold mb-4">Webster</h3>
+            <p className="text-white/80 mb-6 leading-relaxed text-sm md:text-base">
+              Desarrolladores especializados en landing pages y herramientas digitales para empresas y marcas personales. Deja de competir y empieza a liderar. 🚀
             </p>
             
             <div className="space-y-2">

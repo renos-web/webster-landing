@@ -10,7 +10,6 @@ interface ExtrasModalProps {
 
 export const ExtrasModal: React.FC<ExtrasModalProps> = ({ isOpen, onClose, onContact }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const lastFocusedElement = useRef<HTMLElement | null>(null);
 
   // Handle outside click
   useEffect(() => {
@@ -27,19 +26,13 @@ export const ExtrasModal: React.FC<ExtrasModalProps> = ({ isOpen, onClose, onCon
       }
     };
 
+    // NO focus management - just event listeners
     if (isOpen) {
-      // Store the currently focused element
-      lastFocusedElement.current = document.activeElement as HTMLElement;
-      document.body.style.overflow = 'hidden';
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscape);
-    } else {
-      document.body.style.overflow = '';
-      lastFocusedElement.current?.focus();
     }
 
     return () => {
-      document.body.style.overflow = '';
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
     };
@@ -89,7 +82,7 @@ export const ExtrasModal: React.FC<ExtrasModalProps> = ({ isOpen, onClose, onCon
             </div>
             
             <p className="text-xs text-gray-400 mt-6">
-              Precios aplican únicamente al desarrollo del sitio web. El costo de dominio se cobra aparte. Aplican restricciones.
+              Extras opcionales únicamente aplican en la compra de un paquete de desarrollo web (Gold, Platinum o Space Black). Aplican restricciones.
             </p>
           </div>
           
@@ -109,7 +102,7 @@ export const ExtrasModal: React.FC<ExtrasModalProps> = ({ isOpen, onClose, onCon
               }}
               className="rounded-full bg-blue-600 hover:bg-blue-700"
             >
-              Cotizar
+              Agendar videoconferencia
             </Button>
           </div>
         </div>

@@ -135,3 +135,32 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Shimmer animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes shimmer-bg {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Rotating border line animation */
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-shimmer-bg {
+  animation: shimmer-bg 2s ease-in-out infinite;
+}

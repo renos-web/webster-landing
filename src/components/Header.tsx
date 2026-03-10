@@ -8,7 +8,7 @@ const Header = () => {
 
   const navigation = [
     { name: 'Inicio', href: '#inicio' },
-    { name: 'Paquetes', href: '#servicios' },
+    { name: 'Productos', href: '#servicios' },
     { name: 'Ventajas', href: '#ventajas' },
     { name: 'Testimonios', href: '#testimonios' },
     { name: 'Contacto', href: '#contacto' }
@@ -41,13 +41,25 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
+  useEffect(() => {
+    // Escuchar evento personalizado para abrir FAQModal
+    const handleOpenFAQModal = () => {
+      console.log('FAQ button clicked - opening modal');
+      const event = new CustomEvent('openFAQModal');
+      window.dispatchEvent(event);
+    };
+
+    window.addEventListener('openFAQModal', handleOpenFAQModal);
+    return () => window.removeEventListener('openFAQModal', handleOpenFAQModal);
+  }, []);
+
   return (
     <header className={`fixed w-full top-4 z-50 px-4 ${scrolled ? 'py-2' : 'py-4'} transition-all duration-300`}>
       <div className="max-w-7xl mx-auto">
         <div className={`bg-black/80 backdrop-blur-md rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
           {/* Logo - Hidden on mobile */}
           <div className="hidden md:block flex-shrink-0">
-            <h1 className="text-xl font-bold text-white">Webster</h1>
+            <img src="/images/webster-logo.png" alt="Webster" className="h-8 w-auto" />
           </div>
 
           {/* Desktop Navigation */}
@@ -63,8 +75,18 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex flex-shrink-0">
+          {/* CTA Buttons */}
+          <div className="hidden md:flex flex-shrink-0 items-center gap-3">
+            <Button 
+              onClick={() => {
+                // Abrir FAQModal directamente
+                const event = new CustomEvent('open-faq-modal');
+                window.dispatchEvent(event);
+              }}
+              className="bg-white/10 hover:bg-white/20 text-white font-medium rounded-full px-4 py-2 transition-all duration-300 border border-white/20"
+            >
+              FAQ's
+            </Button>
             <Button 
               onClick={() => scrollToSection('#contacto')}
               className="gap-2 bg-[#0053e3] hover:bg-[#0047c0] text-white font-medium rounded-full px-6 py-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#0053e3]/30 hover:scale-105"
@@ -101,6 +123,17 @@ const Header = () => {
                 </button>
               ))}
               <div className="pt-2 pb-3 px-1">
+                <Button 
+                  onClick={() => {
+                    // Abrir FAQModal directamente en móvil
+                    const event = new CustomEvent('open-faq-modal');
+                    window.dispatchEvent(event);
+                    setIsMenuOpen(false); // Cerrar menú móvil
+                  }}
+                  className="w-full mb-2 bg-white/10 hover:bg-white/20 text-white font-medium rounded-full py-2 transition-all duration-300 border border-white/20"
+                >
+                  FAQ's
+                </Button>
                 <Button 
                   onClick={() => scrollToSection('#contacto')}
                   className="w-full gap-2 bg-[#0053e3] hover:bg-[#0047c0] text-white font-medium rounded-full py-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#0053e3]/30"
