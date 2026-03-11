@@ -80,9 +80,9 @@ const Hero = () => {
           className="md:hidden absolute inset-0 w-full h-full object-cover"
           onPlay={handlePlay}
           onPause={handlePause}
-          preload="metadata"
+          preload="auto"
         >
-          <source src="/images/fondo-móvil-HD.mp4" type="video/mp4" />
+          <source src="/images/fondo-movil-HD.mp4" type="video/mp4" />
         </video>
       </div>
       
