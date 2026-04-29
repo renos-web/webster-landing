@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MessageCircle, Mail, MapPin, Clock, Instagram } from 'lucide-react';
+import { MessageCircle, Mail, MapPin, Clock, Instagram, Video } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +54,7 @@ const Contact = () => {
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent('Hola! Me interesa crear una landing page para mi negocio. ¿Podrían darme más información?');
-    window.open(`https://wa.me/527771101880?text=${message}`, '_blank');
+    window.open(`https://wa.me/527775313939?text=${message}`, '_blank');
   };
 
   return (
@@ -74,7 +74,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">WhatsApp</h3>
-                  <p className="text-white/80">+52 777 110 1880</p>
+                  <p className="text-white/80">+52 777 531 3939</p>
                 </div>
               </div>
 
@@ -108,6 +108,16 @@ const Contact = () => {
               >
                 <MessageCircle className="w-6 h-6" />
                 Habla con un asesor
+              </Button>
+              
+              <Button 
+                variant="outline"
+                size="xl"
+                onClick={() => window.location.href = '/confirmacion'}
+                className="w-full gap-2 text-lg py-6 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white border-blue-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105"
+              >
+                <Video className="w-6 h-6" />
+                Agenda una videoconferencia
               </Button>
               
               <a 
