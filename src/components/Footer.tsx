@@ -3,9 +3,16 @@ import { MessageCircle, Mail, Instagram, Facebook, Twitter } from 'lucide-react'
 
 const Footer = () => {
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // Verificar si estamos en la página de confirmación
+    if (window.location.pathname === '/confirmacion') {
+      // Si estamos en confirmación, navegar a la página principal
+      window.location.href = '/' + href;
+    } else {
+      // Si estamos en la página principal, hacer scroll normal
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -23,7 +30,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black text-white">
+    <footer className="w-full bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -36,7 +43,7 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 <MessageCircle className="w-5 h-5" />
-                <span>+52 777 110 1880</span>
+                <span>+52 777 531 3939</span>
               </div>
             </div>
           </div>
@@ -88,14 +95,11 @@ const Footer = () => {
         <div className="border-t border-white/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-white/60 text-sm">
-              © 2024 Webster. Todos los derechos reservados.
+              © 2026 Webster. Todos los derechos reservados.
             </p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="text-white/60 hover:text-white transition-colors">
-                Aviso de privacidad
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
-                Términos y condiciones
+                Mándanos un mensaje para leer nuestro AVISO DE PRIVACIDAD o nuestros TÉRMINOS Y CONDICIONES.
               </a>
             </div>
           </div>

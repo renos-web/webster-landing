@@ -5,6 +5,7 @@ import Services from './Services';
 import Advantages from './Advantages';
 import Testimonials from './Testimonials';
 import SobreNosotros from './SobreNosotros';
+import Gallery from './Gallery';
 import Contact from './Contact';
 import Footer from './Footer';
 import FloatingAstronaut from './FloatingAstronaut';
@@ -16,6 +17,7 @@ const Index = () => {
       <main>
         <Hero />
         <Services />
+        <Gallery />
         <Advantages />
         <SobreNosotros />
         <Testimonials />
