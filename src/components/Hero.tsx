@@ -54,7 +54,7 @@ const Hero = () => {
   }, [isMobile, isPlaying]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section id="inicio" className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
         {/* Desktop Video */}
         <video 
@@ -99,6 +99,11 @@ const Hero = () => {
           <Play className="h-6 w-6 ml-1" />
         )}
       </Button>
+      
+      {/* H1 optimizado para SEO - Texto ambiental sutil */}
+      <h1 className="absolute bottom-28 left-1/2 transform -translate-x-1/2 text-white/40 text-center text-sm md:text-lg font-light tracking-wide animate-fade-in drop-shadow-sm">
+        Automatización y sistemas digitales a la medida para negocios en México
+      </h1>
     </section>
   );
 };

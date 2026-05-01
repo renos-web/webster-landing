@@ -12,15 +12,12 @@
 }
 
 .sobre-nosotros-title {
-  position: absolute;
-  top: 6rem;
-  right: 18rem;
   font-family: 'Montserrat', sans-serif;
   font-size: 5rem;
   font-weight: 700;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin: 0;
+  margin: 0 0 2rem 0;
   z-index: 10;
   text-align: left;
   line-height: 1;
@@ -45,18 +42,14 @@
 }
 
 .sobre-nosotros-description {
-  position: absolute;
-  top: 16rem;
-  right: 9rem;
-  width: 40%;
-  max-width: 500px;
+  width: 100%;
+  max-width: 600px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   font-size: 1.1rem;
   line-height: 1.8;
   color: #e2e8f0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  transform: translateX(2rem);
   text-align: justify;
   text-justify: inter-word;
   opacity: 0;
@@ -85,12 +78,14 @@
   }
   
   #sobre-nosotros::before {
-    content: "Sobre\A nosotros";
-    white-space: pre;
+    content: "Sobre nosotros";
     font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: white;
+    background: linear-gradient(to right, white 42%, #0054e4 42%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-align: center;
     display: block;
     position: relative;
@@ -101,9 +96,7 @@
     text-shadow: none;
   }
   
-  #sobre-nosotros::after {
-    content: "Webster es un proyecto en expansión que une creatividad y tecnología para crear herramientas digitales que impulsan el crecimiento de los negocios. Nuestro enfoque está en desarrollar soluciones únicas, hechas a la medida y con un propósito claro: aportar valor real a cada cliente.\A\APara nosotros, la transparencia y la satisfacción de nuestros clientes son lo más importante. Atendemos cada proyecto de manera personal y cercana, con la convicción de que no eres un número más... eres un elemento clave para nuestro propio crecimiento.";
-    white-space: pre-line;
+  .sobre-nosotros-mobile-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     font-weight: 300;
@@ -117,5 +110,6 @@
     line-height: 1.6;
     max-width: 500px;
     border: none;
+    white-space: pre-line;
   }
 }

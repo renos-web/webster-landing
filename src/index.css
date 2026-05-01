@@ -164,3 +164,17 @@ All colors MUST be HSL.
 .animate-shimmer-bg {
   animation: shimmer-bg 2s ease-in-out infinite;
 }
+
+/* Fade-in animation for SEO H1 - SIN LAYOUT SHIFT */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 2s ease-out 1s forwards;
+}

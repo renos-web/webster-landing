@@ -136,13 +136,9 @@ export default function Confirmacion() {
                   aria-label={isMuted ? "Activar audio" : "Silenciar"}
                 >
                   {isMuted ? (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M5.889 16H2a1 1 0 01-1-1V3a1 1 0 011-1h3.889l5.294-4.332a.5.5 0 01.817.387l3.692 3.692V8a1 1 0 011-1h4a1 1 0 011 1v8a1 1 0 01-1 1h-4v2.749l-3.692 3.692a.5.5 0 01-.817.387L5.889 16z"/>
-                    </svg>
+                    <span className="text-white text-sm font-medium">Sonido</span>
                   ) : (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71v-8.77c-2.89.86-5 3.54-5 6.71z"/>
-                    </svg>
+                    <span className="text-white text-sm font-medium">Sin sonido</span>
                   )}
                 </button>
               </div>

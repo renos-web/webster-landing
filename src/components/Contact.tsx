@@ -110,15 +110,15 @@ const Contact = () => {
                 Habla con un asesor
               </Button>
               
-              <Button 
-                variant="outline"
-                size="xl"
-                onClick={() => window.location.href = '/confirmacion'}
-                className="w-full gap-2 text-lg py-6 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white border-blue-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105"
+              <a 
+                href="https://calendly.com/webster-tech-main/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full px-6 py-3 text-lg font-medium text-white rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-blue-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 gap-2"
               >
                 <Video className="w-6 h-6" />
                 Agenda una videoconferencia
-              </Button>
+              </a>
               
               <a 
                 href="https://www.instagram.com/webster_landing?igsh=dXo2cDZ2Mm5lZWs1" 
